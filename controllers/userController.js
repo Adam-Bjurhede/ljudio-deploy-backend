@@ -57,11 +57,11 @@ export async function loginUser(req, res) {
 
       httpOnly: true, 
       secure: true, 
-      sameSite: 'lax', 
+      sameSite: 'none', 
       domain: 'ljudio-backend.herokuapp.com',
       path: '/'
 
-    }).json({ success: true });
+    }).json({ success: true, token });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
@@ -73,7 +73,7 @@ export function logoutUser(req, res) {
 
       httpOnly: true, 
       secure: true, 
-      sameSite: 'lax', 
+      sameSite: 'none', 
       domain: 'ljudio-backend.herokuapp.com',
       path: '/'
 
