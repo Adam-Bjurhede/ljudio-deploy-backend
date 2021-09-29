@@ -53,7 +53,15 @@ export async function loginUser(req, res) {
 
     const token = await generateToken({ id: user.id, userName: user.userName });
 
-    res.cookie('authToken', token, { httpOnly: true }).json({ success: true, token });
+    res.cookie('authToken', token, { 
+
+      httpOnly: true, 
+      secure: true, 
+      sameSite: 'none', 
+      domain: 'ljudio-backend.herokuapp.com',
+      path: '/'
+
+    }).json({ success: true });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
@@ -61,7 +69,15 @@ export async function loginUser(req, res) {
 
 export function logoutUser(req, res) {
   try {
-    res.clearCookie('authToken').json({ success: true });
+    res.clearCookie('authToken', {
+
+      httpOnly: true, 
+      secure: true, 
+      sameSite: 'none', 
+      domain: 'ljudio-backend.herokuapp.com',
+      path: '/'
+
+    }).json({ success: true });
   } catch (error) {
     res.status(400).json({ success: false, message: error });
   }
@@ -81,7 +97,7 @@ export async function followPlaylist(req, res) {
 
     return res.json({ success: true });
   } catch (error) {
-    return res.json({ success: false });
+    return res.status(400).json({ success: false });
   }
 }
 
@@ -102,7 +118,7 @@ export async function unFollowPlaylist(req, res) {
 
     return res.json({ success: true });
   } catch (error) {
-    return res.json({ success: false });
+    return res.status(400).json({ success: false });
   }
 }
 
@@ -113,5 +129,7 @@ export async function getFollowedPlaylists(req, res) {
     const followedPlaylists = await Playlist.GetFollowedPlaylists(userId);
 
     return res.json({ success: true, followedPlaylists });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
 }
