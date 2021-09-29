@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://ljudio-official.netlify.app/',
+    origin: 'https://localhost:7000',
     credentials: true,
   })
 );
