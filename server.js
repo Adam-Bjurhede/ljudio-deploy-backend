@@ -13,12 +13,12 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(
+/* app.use(
   cors({
     origin: 'https://ljudio-official.netlify.app',
     credentials: true,
   })
-);
+); */
 env.config();
 
 const PORT = process.env.PORT || 7000;
