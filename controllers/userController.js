@@ -58,7 +58,6 @@ export async function loginUser(req, res) {
       httpOnly: true, 
       secure: true, 
       sameSite: 'strict', 
-/*       domain: 'ljudio-backend.herokuapp.com', */
       path: '/'
 
     }).json({ success: true, token });
@@ -73,8 +72,7 @@ export function logoutUser(req, res) {
 
       httpOnly: true, 
       secure: true, 
-      sameSite: 'none', 
-      domain: 'ljudio-backend.herokuapp.com',
+      sameSite: 'strict', 
       path: '/'
 
     }).json({ success: true });
