@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 export async function verifyToken(req, res, next) {
   try {
@@ -8,7 +9,7 @@ export async function verifyToken(req, res, next) {
       return res.json({ loggedIn: false });
     }
 
-    const data = await jwt.verify(authToken, 'sEcReTkEy');
+    const data = await jwt.verify(authToken, process.env.SECRET);
 
     req.obj = {
       id: data.id,
